@@ -317,9 +317,14 @@ const FocusModeWidget: React.FC = () => {
                     </div>
                     
                     {/* Video container is always in the DOM during a session. When minimized, it's positioned absolutely off-screen to keep it active. */}
-                    <div className={`bg-background rounded-md overflow-hidden ${isPreviewMinimized ? 'absolute w-px h-px -left-full' : 'relative mb-2 aspect-video'}`}>
-                        <video ref={videoRef} autoPlay playsInline muted className={`w-full h-full object-cover transition-all duration-300 border-2 ${isDistracted ? 'border-yellow-400' : 'border-transparent'}`} />
-                        <canvas ref={canvasRef} className="absolute top-0 left-0" />
+                    <div className={`bg-background rounded-md overflow-hidden transition-all duration-300 ${isPreviewMinimized ? 'absolute w-px h-px -left-full' : 'relative mb-2 aspect-video'} ${isDistracted && !isPreviewMinimized ? 'ring-2 ring-red-500 shadow-lg shadow-red-500/20' : 'ring-0 ring-transparent'}`}>
+                        <video ref={videoRef} autoPlay playsInline muted className={`w-full h-full object-cover transition-all duration-300 ${isDistracted && !isPreviewMinimized ? 'blur-sm' : 'blur-none'}`} />
+                        <canvas ref={canvasRef} className="absolute top-0 left-0 pointer-events-none" />
+                        {isDistracted && !isPreviewMinimized && (
+                            <div className="absolute bottom-2 right-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded shadow-lg animate-fade-in pointer-events-none">
+                                DISTRACTED
+                            </div>
+                        )}
                     </div>
 
                     {/* Conditionally render the correct stats view */}
