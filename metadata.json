@@ -1,0 +1,8 @@
+{
+  "name": "CareerWise AI",
+  "description": "An AI-powered personalized career advisor for students and young professionals. It provides tools for career path navigation, skill development, and job application readiness.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
